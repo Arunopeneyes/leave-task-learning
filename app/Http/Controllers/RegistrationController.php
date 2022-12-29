@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-
 class RegistrationController extends Controller
 {
    public function store(Request $request)
@@ -45,9 +44,9 @@ class RegistrationController extends Controller
       $accessToken = $abc->createToken('Access Token');
       return response()->json(['message' => 'data Enter Succesfully', 'token' => $accessToken, 'info' => $abc], 201);
 
-      } catch (Exception $e) {
+      } catch (\Exception $e) {
          report($e);
-         return response()->json(['error' => $e],500);
+         return response()->json(['error' => $e->getMessage()],e.getMessage());
       }
    }
 
@@ -74,28 +73,17 @@ class RegistrationController extends Controller
       $leave->User_Id = Auth::user()->id;
       $leave->save();
       return response()->json(['message' => 'Data Successfuly ' . $msg], $code);
-      // Addleave::add($request);
-      //$accessToken = $leave->createToken('Access Token');
-
    }
    public function getlist($is_upcoming = 0)
    {
-      $leave = Addleave::where('User_Id', '=', Auth::user()->id);
+      $leave = Addleave::where('User_Id',Auth::user()->id);
       if ($is_upcoming == 1) {
          $leave->where('Date', ">=", Carbon::now());
       }
       $leave = $leave->get();
-      return response()->json(['message' => 'data Display', 'Data' => $leave],202);
+      return response()->json(['message' => 'data Display', 'Data' => $leave], 202);
 
    }
-
-   // public function upcomingleave()
-   // {
-   //    $abc = Addleave::where('User_Id', '=', Auth::user()->id)->where('Date', ">=", Carbon::now())->get();
-   //    return response()->json(['message' => 'Data Display', 'Data' => $abc, 200]);
-   // }
-
-
    public function delete($id)
    {
 
