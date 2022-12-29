@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "c08d8513-e0e4-4c71-8e13-1ee4b6775a32",
+		"name": "Leave",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24936277"
+	},
+	"item": [
+		{
+			"name": "With Auth",
+			"item": [
+				{
+					"name": "Add Leave",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Date\":\"2022-12-30\",\r\n    \"Reason\":\"sunday funday \",\r\n    \"Other_Comment\":\"hiii\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/addupdateleave"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Leave",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Date\":\"2022-12-30\",\r\n    \"Reason\":\"sunday funday \",\r\n    \"Other_Comment\":\"Arun\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/addupdateleave/13"
+					},
+					"response": []
+				},
+				{
+					"name": "Get List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/getlist"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Up Comming Leaves",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/getlist/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/delete/9"
+					},
+					"response": []
+				},
+				{
+					"name": "Absent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/absent"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNWM0NTM3MzRhNzhiMTE1YzZlNTYwNmM0MWNlNGFjZmY1YzRiYTgyM2Q5ODYzMjExMDgyZTM5OWYxMzZkNjM1ZDE5ZWJhYzRkOWY2YmQwMzEiLCJpYXQiOjE2NzIyMjk5MDkuNTk1NjMxLCJuYmYiOjE2NzIyMjk5MDkuNTk1NjM0LCJleHAiOjE3MDM3NjU5MDkuNTg1NjI0LCJzdWIiOiIxOSIsInNjb3BlcyI6W119.M0excpLoXeSgfn8_-b5VV27zRZfNFsBdGIQ60KOlieo9U81s2Zdaw7Fhc1RTgw4SGzk7xOoAkmtwXwxKATqsIxMtC9e5WV-HKuxTu505Zt68w0vU9gNT_q2QWQTGwgvaiWh0baIOni3ti5yesaKLChAI1nWyRTcMkBPU4-C0GoCCO0yRa0Qd8njgtSt8J2UkD6wtt6V3Gu79Q9IzmRgR_rC5MyPgd3IRtiz6wUVg6s2HZtTqIfmx-0muwLBJ6Q9SdPv-CQuNJALDfQS6iEtEkEkstiFCAr80hMDrcDoXfcKSPMAPC1h6ceoBcDGMv1oK22Ck-1l_S0xPyoJDIsdXlzgXC2O75OE4fuhu72Lza0FFGpxHS3QxEbdLk0jGy6WHv7Ax8e9CdUPlzcFYmg_RcPn9_pJ4MYnK8DHKrYHC751Pak_o2oEETBaQ9ZshH6mWqG6EJZ32u05p1xGDLrKmO1Fr4M-_fuKam2t5HI7CCEDdBiLN1ie1AxALUJ-iMxSIToWP4RxQOzNju_jxAEq23HDPna5I-uDwHJpAeiCeeFFEx8LQrmHXd6oBydTkW_M7_kRmfKFwTd0P4molyTVgfpmEzWrQpffuaV19gqqEPEshin9vFpTQ5Zg4PHEXXTRE0l9UOGAqrOSlHfzFTAQ_QSuwttkZE6tfmFaOAomoI2Y"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Without Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Email\":\"arun@gmail.com\",\r\n    \"Password\":\"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Full_Name\": \"mustakim\",\r\n    \"Email\": \"mustakim@gmail.com\",\r\n    \"Password\": \"123\",\r\n    \"Job_Title\": \"intern\",\r\n    \"Phone_Num\": \"8141810562\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{base_url}/registration"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost/Leave_calendar/public/api",
+			"type": "string"
+		}
+	]
+}
