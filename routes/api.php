@@ -30,7 +30,7 @@ Route::post('/login', [RegistrationController::class, 'login']);
 Route::post('/registration', [RegistrationController::class, 'store']);
 //Route::post('/addleave',[RegistrationController::class,'addleave'])->middleware('auth');
 
-
+//authentication required
 Route::middleware('auth:api')->group(function () {
     Route::post('/addupdateleave/{id?}', [RegistrationController::class, 'addleave']);
     Route::get('/getlist/{is_upcoming?}', [RegistrationController::class, 'getlist']);
