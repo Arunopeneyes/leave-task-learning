@@ -58,6 +58,7 @@ class RegistrationController extends Controller
          'Other_Comment' => 'required'
 
       ]);
+      //hello
       if (is_null($id)) {
          $leave = new Addleave;
          $msg = "added";
