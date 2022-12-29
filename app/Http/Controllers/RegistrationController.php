@@ -84,6 +84,7 @@ class RegistrationController extends Controller
       return response()->json(['message' => 'data Display', 'Data' => $leave], 202);
 
    }
+   //hello
    public function delete($id)
    {
 
