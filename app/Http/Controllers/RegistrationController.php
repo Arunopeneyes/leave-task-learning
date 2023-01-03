@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotifyMail;
 use Illuminate\Http\Request;
 use App\Models\Calendar;
 use App\Models\addleave;
 use App\User;
+use Mail;
 use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Mail;
 use Validator;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -22,29 +25,48 @@ class RegistrationController extends Controller
          'Phone_Num' => 'required'
       ]);
       $user = Calendar::create($abc);
-      $accessToken = $user->createToken('Access Token');
 
-      return response()->jason(['user' => $user, 'Message' => 'Registration Successfully'], 201);
+      $accessToken = $user->createToken('Access Token');
+      $mails = [
+         'Subject' => 'Registration Succesfully',
+                'body' => 'You Are Most Welcome...!'
+              ];
+
+      Mail::to($request->Email)->send(new NotifyMail($mails)); 
+      return response()->json(['message' => 'data Enter Succesfully', 'token' => $accessToken, 'info' => $abc], 201);
+      
    }
 
 
 
    public function login(Request $request)
    {
-      try {
-         
-      $abc = $request->validate
-      ([
+     try {
+    //  $pin = rand(2000, 5000); 
+      $validation = $request->validate([
             'Email' => 'required',
             'Password' => 'required'
          ]);
 
 
       $abc = Calendar::where('Email', '=', $request->Email)->where('Password', '=', $request->Password)->first();
-      $accessToken = $abc->createToken('Access Token');
-      return response()->json(['message' => 'data Enter Succesfully', 'token' => $accessToken, 'info' => $abc], 201);
+      $confemail = $abc->Email;
+      // if($abc)
+      // {
+      //    $abc->update('Pin'->$pin);
+      //    $info = [
+      //       'subject' => 'Send Otp',
+      //       'body' => 'Verify Otp' .$pin
+      //    ];
+      //    Mail::to($confemail)->send(new LoginMail($info)); 
 
-      } catch (\Exception $e) {
+
+    
+      $accessToken = $abc->createToken('Access Token');
+      return response()->json(['message' => 'Registration Succesfully', 'token' => $accessToken, 'information' => $abc], 201);
+
+      }
+       catch (\Exception $e) {
          report($e);
          return response()->json(['error' => $e->getMessage()],e.getMessage());
       }
@@ -58,7 +80,7 @@ class RegistrationController extends Controller
          'Other_Comment' => 'required'
 
       ]);
-      //hello
+      
       if (is_null($id)) {
          $leave = new Addleave;
          $msg = "added";
@@ -99,11 +121,12 @@ class RegistrationController extends Controller
    }
    public function todayabsent()
    {
-      $date = date('yyyy-mm-dd');
 
-      $leave = Addleave::where('Date', '=', $date)->get();
+      $abc = Carbon::now();
+      $date = $abc->toDateString();
+       $leave = Addleave::where('Date', '=', $date)->get();
       return response()->json(['message' => 'Absent Employee', 'Data' => $leave, 200]);
-   }
+    }
 
    public function getdata($id)
    {
@@ -114,4 +137,38 @@ class RegistrationController extends Controller
 
       return response()->json(['message' => 'data not Found', 405]);
    }
+
+   // public function html_email() {
+   //    $abc = [
+   //       'Subject' => 'welcome my page',
+   //       'body' => 'Your most welcome'
+   //    ];
+   //  Mail::to("ankitkyada23@gmail.com")->send(new MyTestMail($abc));  
+   // }
+
+
+   // public function login1(Request $request)
+   // {  
+   //    $request->validate
+   //    ([
+   //          'Email' => 'required',
+   //          'Password' => 'required'
+   //       ]);
+   //       $abc = Calendar::where('Email', '=', $request->Email)->where('Password', '=', $request->Password)->first();
+   //    $array = array(['Email' => $request->Email]);
+
+   //            if($abc)
+   //            {
+   //             $xyz = [
+   //                'Subject' => 'welcome my page',
+   //             'body' => 'Your most welcome'
+   //            ];
+   //            Mail::to($array[['Mail']])->send(new MyTestMail($abc)); 
+   //            return response()->json(['message' => 'You Are Login ans Sent Mail Your Email...!'],202);
+   //            }
+   //            else{
+   //             return response()->json(['message' => 'Your Email And PAssword Not Match'],404);
+   //            }
+   // }
+
 }

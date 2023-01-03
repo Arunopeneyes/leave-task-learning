@@ -21,12 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+Route::get('sentemail', [RegistrationController::class, 'html_email']);
 
 Route::post('/leave', [AddleaveController::class, 'store']);
 
 
 Route::post('/login', [RegistrationController::class, 'login']);
+//Route::post('/login1', [RegistrationController::class, 'login1']);
 Route::post('/registration', [RegistrationController::class, 'store']);
 //Route::post('/addleave',[RegistrationController::class,'addleave'])->middleware('auth');
 
@@ -38,5 +39,5 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/getdata/{id}', [RegistrationController::class, 'getdata']);
     Route::get('/absent', [RegistrationController::class, 'todayabsent']);
     Route::get('/upcomingleave', [RegistrationController::class, 'upcomingleave']);
-    Route::get('/absent', [RegistrationController::class, 'todayabsent']);
+   // Route::get('/absent', [RegistrationController::class, 'todayabsent']);
 });
